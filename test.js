@@ -1,31 +1,22 @@
-function initializeFeature() {
-  document.addEventListener("DOMContentLoaded", () => {
-    const elements = document.querySelectorAll('[data-my-feature]');
-    elements.forEach(el => {
-      const featureType = el.getAttribute('data-my-feature');
-      // Initialize different functionalities based on the featureType
-      if (featureType === 'modal') {
-        // Initialize modal functionality
-      } else if (featureType === 'disable-section') {
-        // Add click event listener to buttons meant to disable sections
-        el.addEventListener('click', function() {
-          // Find the section to hide
-          const sectionToHide = document.querySelector('[data-test-hide-section="true"]');
-          // Optionally hide the section or take other actions
-          // sectionToHide.style.display = 'none'; // Uncomment to hide the section
-          
-          // Disable the button
-          el.disabled = true;
-        });
-      }
-    });
-  });
-}
 
-// Extend the data-my-feature with a new featureType 'disable-section'
-// Ensure your HTML button has data-my-feature="disable-section" instead of data-test-button="true"
-// Example: <button data-my-feature="disable-section">Disable Section</button>
 
-// Call the function to initialize features
-initializeFeature();
+  // function to run when clicked on the button with data-button='value'
+  const buttonClickHandler = (event) => {
+    // Hide the button with data-disable-button='value'
+    const disableButton = document.querySelector(`[data-disable-button='value']`);
+    if (disableButton) {
+      disableButton.style.display = 'none'; // Hide the button
+    }
+    
+    // Log to console that button is clicked
+    console.log("Button clicked");
 
+    // Optionally, you can remove the event listener if needed
+    event.target.removeEventListener("click", buttonClickHandler);
+  };
+
+  // Select the button with data-button='value' and add click event listener
+  const button = document.querySelector(`[data-button='value']`);
+  if (button) {
+    button.addEventListener("click", buttonClickHandler);
+  }
